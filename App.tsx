@@ -15,6 +15,8 @@ import {Point} from './src/components/Point'
 import styled from 'styled-components/native';
 import RoverImage  from './src/assets/images/rover-image.png'
 import IconNavigation from './src/assets/icons/icon-navigation.svg'
+import images from './src/commons/imges'
+import { Pointer } from './src/components/Pointer';
 
 export default function App() {
   const [location, setLocation] = useState<LocationObject | null>(null)
@@ -80,30 +82,49 @@ export default function App() {
                   longitude:long,
                 }}
                 >
-              {point.slug !== "camping" && <Callout>
-                  {/* <Point 
-                    type='marker'
-                    name={point.name}
-                    category={point.category}
-                    imageUrl={point.imageUrl}
-                    location={[lat, long]}
-                  /> */}
+              {point.slug !== "camping" && 
 
-                  <CardPointer>
-                    <ImagePointer source={RoverImage || {uri: point.imageUrl}} />
-                    <ContentPointer>
-                      <TitlePoint>{point.name}</TitlePoint>
-                      <TitlePoint>{point.category}</TitlePoint>
-                      <ButtonPointer>
-                          <IconButtonPointer source={IconNavigation}/>
-                          <TouchableHighlight onPress={()=>{}}>
-                            <TextButtonPointer>Ver mais</TextButtonPointer>
-                          </TouchableHighlight>
-                      </ButtonPointer>
-                    </ContentPointer>
+              <Pointer 
+                slug={point.slug}
+                name={point.name}
+                category={point.category}
+                imageUrl={point.imageUrl}
+                location={point.location}
+              />
+
+              // <CalloutPointer            
+              //   tooltip
+              //   onPress={()=>{
+              //               console.log("[VER MAIS]: ", point.name)
+              //             }}>
+              //     {/* <Point 
+              //       type='marker'
+              //       name={point.name}
+              //       category={point.category}
+              //       imageUrl={point.imageUrl}
+              //       location={[lat, long]}
+              //     /> */}
+
+              //     <CardPointer>
+              //       <ImagePointer source={images.rover} />
+              //       <ContentPointer>
+              //         <TitlePoint>{point.name}</TitlePoint>
+              //         <SubTitlePoint>{point.category}</SubTitlePoint>
+              //         <ButtonPointer>
+              //             <IconButtonPointer source={require('./src/assets/icons/icon-navigation.svg')}/>
+              //             <TouchableHighlight onPress={()=>{
+              //               console.log("[VER MAIS]: ", point.name)
+              //             }}>
+              //               <TextButtonPointer>Ver mais</TextButtonPointer>
+              //             </TouchableHighlight>
+              //         </ButtonPointer>
+              //       </ContentPointer>
                     
-                  </CardPointer>
-                </Callout>}
+              //     </CardPointer>
+              //     <SplotCalloutPointer />
+              //   </CalloutPointer>
+                
+                }
               </Marker>
           )})
         }
@@ -112,27 +133,59 @@ export default function App() {
   );
 }
 
+export const SplotCalloutPointer = styled.View`
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  right: 50%;
+  transform: translateX(-15px); /* Ajuste para centralizar */
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+`
+export const CalloutPointer = styled(Callout)`
+  flex:1;
+  justify-content: center;
+  align-items: center;
+  `
 
 export const CardPointer = styled.View`
-  display: flex;
+  flex:1;
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  margin-top: 4px;
+  background-color: #fff;
 
-  gap: 12px;
+  border-radius: 20px;
+  padding: 12px; 
+
+  shadow-color: #000;
+  shadow-offset: 0 2px;
+  shadow-opacity: 0.3;
+  shadow-radius: 2px;
+  elevation: 5;
+
 `
 
-export const ImagePointer = styled.Image`
+export const ImagePointer = styled.View`
   width: 56px;
   height: 56px;
   border-radius: 46px;
+  border: 1px solid #333;
+  margin-right: 8px;
 `
 
 export const TitlePoint = styled.Text`
   font-weight: bold;
-  font-size:14px;
+  font-size:16px;
   color: #1B1D54;
+`
+
+export const SubTitlePoint = styled.Text`
+  font-weight: 300;
+  font-size:12px;
+  color: #717178;
 `
 
 export const ContentPointer = styled.View`
@@ -142,11 +195,12 @@ export const ContentPointer = styled.View`
     align-items: flex-start;
 `
 
-export const ButtonPointer = styled.View`      
-  align-items: center;
+export const ButtonPointer = styled.View`   
+  flex:1;   
+  align-items: flex-start;
   justify-content: space-between;
-
-  padding: 8px 6px;
+  width: 100%;
+  padding: 0 6px;
 `
 
 export const TextButtonPointer = styled.Text`
