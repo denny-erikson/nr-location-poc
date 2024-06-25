@@ -65,9 +65,10 @@ export const ContentPointer = styled.View`
 `
 
 export const ButtonPointer = styled.View`   
-  flex:1;   
-  align-items: flex-start;
-  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
   width: 100%;
   padding: 0 6px;
 `
