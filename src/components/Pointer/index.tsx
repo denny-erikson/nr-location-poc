@@ -2,14 +2,27 @@ import { PointType } from "../../commons/pointEnum"
 import { TouchableHighlight } from "react-native"
 import { ButtonPointer, CalloutPointer, CardPointer, ContentPointer, IconButtonPointer, ImagePointer, SplotCalloutPointer, SubTitlePoint, TextButtonPointer, TitlePoint } from "./styles"
 import ImageNavigation from  '../../assets/icons/icon-navigation.svg'
+import { useModal } from "../../hooks/useModal"
+import { useFilterPoint } from "../../hooks/useFilterPoint"
 
 
-export const Pointer = ({name, imageUrl, category}: PointType) =>{
+export const Pointer = ({slug, name, imageUrl, category, description, location}: PointType) =>{
+    const {toggleModal} = useModal()
+    const {setPoint} = useFilterPoint()
+
     return (
         <CalloutPointer            
         tooltip
         onPress={()=>{
-            console.log("[VER MAIS]: ", name)
+            toggleModal()
+            setPoint({
+                slug,
+                name,
+                imageUrl,
+                category,
+                description,
+                location
+              })
             }}>
 
           <CardPointer>
@@ -20,7 +33,7 @@ export const Pointer = ({name, imageUrl, category}: PointType) =>{
               <ButtonPointer>
                   <IconButtonPointer source={ImageNavigation}/>
                   <TouchableHighlight onPress={()=>{
-                    console.log("[VER MAIS]: ", name)
+                    
                   }}>
                     <TextButtonPointer>Ver mais</TextButtonPointer>
                   </TouchableHighlight>

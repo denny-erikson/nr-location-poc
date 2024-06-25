@@ -1,72 +1,50 @@
-// src/components/ImageSlider.tsx
-import React, { useEffect, useState } from 'react';
-import Slider from 'react-slick';
-import styled from 'styled-components';
-import SliderStyles from './styles';
 
-const SliderContainer = styled.div`
-  width: 114%;
+import styled from 'styled-components/native';
+import PagerView from 'react-native-pager-view';
+import { Text, View } from 'react-native';
+
+const SliderContainer = styled.View`
+  width: 100%;
+  height: 220px;
   margin: 0 auto;
-  padding: 12px 0; // Adiciona um pouco de padding para estética
+  padding: 12px 0;
   box-sizing: border-box;
   margin-top:24px;
-  margin-left: -20px;
-
+  background-color: #f2f2fa;
 `;
 
-const Slide = styled.div`
-  display: flex;
+const Slide = styled.View`
   justify-content: center;
   align-items: center;
   height: 220px;
   overflow: hidden;
   margin-right: 4px;
+  background-color: #777;
 `;
 
-const SlideImage = styled.img`
+const SlideImage = styled.Image`
   max-width: 100%;
   object-fit: cover;
   padding:4px;  
+  background-color: #999;
 `;
 
 interface ImageSliderProps {
   images: string[];
-  isOpen: boolean; 
+  isOpen?: boolean; 
 }
 
 export const ImageSlider: React.FC<ImageSliderProps> = ({ images, isOpen }) => {
-  const [sliderKey, setSliderKey] = useState(0);
-
-  useEffect(() => {
-    if (isOpen) {
-      setSliderKey(prevKey => prevKey + 1); 
-    }
-  }, [isOpen]);
-
-  const settings = {
-
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1.05,
-    slidesToScroll: 1,
-    centerPadding: '0', // Ajusta o padding central
-    arrows: true,
-  };
-
   return (
-    <>
-      <SliderStyles />
-      <SliderContainer>
-        <Slider key={sliderKey} {...settings}>
+    <SliderContainer>
+        <PagerView initialPage={0}>
           {images.map((image, index) => (
             <Slide key={index}>
               <SlideImage src={image} alt={`Slide ${index}`} />
             </Slide>
           ))}
-        </Slider>
-      </SliderContainer>
-    </>
+        </PagerView>
+    </SliderContainer>
   );
 };
 
