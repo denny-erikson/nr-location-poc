@@ -4,8 +4,17 @@
     "strict": true,
     "plugins": [
       {
-          "name": "@styled/typescript-styled-plugin"
+        "name": "@styled/typescript-styled-plugin"
       }
+    ],
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
   ]
-  }
 }

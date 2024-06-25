@@ -30,7 +30,7 @@ export const Point = ({name, category, imageUrl, location, type}: PointProps) =>
 
     if(type === "profile") return (
         <CardProfile>
-            <Image src={imageUrl} alt={`${name}`}/>
+            <Image source={{uri:imageUrl}} alt={`${name}`}/>
             <View>
                 <Text>{name}</Text>
                 <Text>Visitante</Text>
@@ -46,12 +46,12 @@ export const Point = ({name, category, imageUrl, location, type}: PointProps) =>
     )
     return (
         <Container>            
-            <Image src={imageUrl} alt={`${name}`}/>
+            <Image source={{uri:imageUrl}} alt={`${name}`}/>
             <View>
                 <Text>{name}</Text>
                 <Text>{category}</Text>
                  <TouchableHighlight onPress={toggleModal}>
-                    <Image src={IconNavigation}/> {` `}
+                    <Image source={IconNavigation}/> {` `}
                     Ir para {name}
                 </TouchableHighlight>
             </View>

@@ -2,6 +2,8 @@
 // import { markerEnum } from "./markerEnum"
 // import { MarkerImage } from '../components/MarkerImage'
 
+import { markerEnum } from "./markerEnum"
+
 export type PointType = {
   slug: string
   name: string
@@ -9,7 +11,7 @@ export type PointType = {
   description: string
   imageUrl: string
   location: [number, number]
-  // icon: Icon
+  icon?: string | any
   }
 
 export enum PointEnumType {
@@ -34,7 +36,7 @@ export const pointEnum: MarkerTypes = {
     location: [
       -22.83625411510771, -45.78033164558295
     ],
-    // icon: markerEnum.compass
+    icon: require('../../assets/images/compass-nr156.png')
   },
  hoverBoard:   {
     slug: 'hoverBoard',
@@ -45,7 +47,7 @@ export const pointEnum: MarkerTypes = {
     location: [
       -22.83568225015796, -45.78061578398183
     ],
-    // icon: markerEnum.hoverboard
+    icon: require('../../assets/images/hoverboard-icon156.png')
   },
   caiaques_and_stand_up_paddle:   {
     slug: 'caiaques_and_stand_up_paddle',

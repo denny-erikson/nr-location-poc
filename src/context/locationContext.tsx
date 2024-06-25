@@ -34,8 +34,8 @@ export const LocationContextProvider = ({ children }: { children: ReactNode }) =
       await Location.watchPositionAsync(
         {
           accuracy: Location.Accuracy.Highest,
-          timeInterval: 5000,
-          distanceInterval: 50,
+          timeInterval: 3000,
+          distanceInterval: 10,
         },
         (response) => {
           setLocation(response);

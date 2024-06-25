@@ -1,3 +1,4 @@
+import React from "react";
 import { FilterPointContextProvider } from "./src/context/filterPointContext";
 import { LocationContextProvider } from "./src/context/locationContext";
 import { ModalContextProvider } from "./src/context/modalContext";

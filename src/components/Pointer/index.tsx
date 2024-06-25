@@ -1,9 +1,11 @@
 import { PointType } from "../../commons/pointEnum"
-import { TouchableHighlight } from "react-native"
+import { Image, TouchableHighlight } from "react-native"
 import { ButtonPointer, CalloutPointer, CardPointer, ContentPointer, IconButtonPointer, ImagePointer, SplotCalloutPointer, SubTitlePoint, TextButtonPointer, TitlePoint } from "./styles"
-import ImageNavigation from  '../../assets/icons/icon-navigation.svg'
+import ImageNavigation from  '../../../assets/icons/icon-navigation.svg'
 import { useModal } from "../../hooks/useModal"
 import { useFilterPoint } from "../../hooks/useFilterPoint"
+import { StyleSheet } from "react-native"
+import { useEffect } from "react"
 
 
 export const Pointer = ({slug, name, imageUrl, category, description, location}: PointType) =>{
@@ -11,9 +13,13 @@ export const Pointer = ({slug, name, imageUrl, category, description, location}:
     const {setPoint} = useFilterPoint()
 
     return (
-        <CalloutPointer            
-        tooltip
-        onPress={()=>{
+        <CalloutPointer 
+          styled={{
+            with: 200,
+            height: 58,
+          }}           
+          tooltip
+          onPress={()=>{
             toggleModal()
             setPoint({
                 slug,
@@ -26,7 +32,9 @@ export const Pointer = ({slug, name, imageUrl, category, description, location}:
             }}>
 
           <CardPointer>
-            <ImagePointer source={{uri: imageUrl}} />
+            <ImagePointer>
+              <Image style={styles.image} source={{uri: imageUrl}}/>
+            </ImagePointer>
             <ContentPointer>
               <TitlePoint>{name}</TitlePoint>
               <SubTitlePoint>{category}</SubTitlePoint>
@@ -45,6 +53,17 @@ export const Pointer = ({slug, name, imageUrl, category, description, location}:
         </CalloutPointer>
     )
 }
+
+const styles = StyleSheet.create({
+  image: {
+    width: 56,
+    height: 56,
+    borderRadius: 56,
+    resizeMode: 'cover',
+  },
+
+
+})
 
 
 

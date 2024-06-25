@@ -1,11 +1,11 @@
-import {TouchableOpacity, View } from 'react-native';
+import {Image, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components/native';
 import { pointEnum } from '../../commons/pointEnum';
-import { ImageSlider } from '../ImageSlider';
 import { useModal } from '../../hooks/useModal';
 import { useFilterPoint } from '../../hooks/useFilterPoint';
 import { calculateDistanceAndTime } from '../../utils/calculateDistanceAndTime';
 import { useLocation } from '../../context/locationContext';
+import MapView, { Marker } from 'react-native-maps';
 
 
 export const ContentDetails = () => {
@@ -33,9 +33,27 @@ export const ContentDetails = () => {
     }
   };
 
+  const initialCamera = {
+    zoom: 17,
+    center: {
+      latitude: point?.location[0] || 0,
+      longitude: point?.location[1] || 0,
+    },
+    pitch: 30
+  };
+
   return (
     <CardContentDetails>        
-      <ImageSlider images={images} isOpen/>
+      <View style={styles.imagesContainer}>
+        <ScrollView horizontal pagingEnabled>
+          {/* <Image style={styles.image} source={require("../../../assets/images/rover-image.png")} />
+          <Image style={styles.image} source={{ uri: 'https://fmnova.com.br/images/noticias/safe_image.jpg' }} />
+          <Image style={styles.image} source={{ uri: 'https://fmnova.com.br/images/noticias/safe_image.jpg' }} /> */}
+        </ScrollView>
+      </View>
+
+      <Image style={styles.image} source={require('../../../assets/images/rover-image.png')} />
+      <Image style={styles.image} source={{ uri: point?.imageUrl }} />
 
       <View style={{ paddingHorizontal: 20}}>
       <View style={{
@@ -64,11 +82,38 @@ export const ContentDetails = () => {
 
       <ContainerPosition>
         <MapContainer>
-          {/* <MapStatic 
-            type='detail'
-            coords={points[1].location}
-            points={[points[1]]}
-          /> */}
+          <MapView 
+              initialRegion={{
+                latitude: point?.location[0]  || 0,
+                longitude: point?.location[1] || 0,
+                latitudeDelta: 0.008,
+                longitudeDelta: 0.008,
+              }} 
+              // zoomEnabled={false}
+              pitchEnabled={false}
+              scrollEnabled={false}
+              rotateEnabled={false}
+              // zoomControlEnabled={false}
+              mapType='satellite'
+              style={styles.mapStyle}
+              initialCamera={{
+                zoom: 20,
+                center: {
+                  latitude: point?.location[0] || 0,
+                  longitude: point?.location[1] || 0,
+                },
+                pitch: 0,
+                heading: 0 
+              }}
+            >
+              <Marker 
+                // icon={mapMarkerImg}
+                coordinate={{ 
+                  latitude: point?.location[0]  || 0,
+                  longitude: point?.location[1] || 0,
+                }}
+              />
+            </MapView>
         </MapContainer>
         <ButtonMap onPress={handleStartNavigation}>
           <TextMap>Ver rota para HoverBoard</TextMap>
@@ -162,3 +207,28 @@ export const IconDistence = styled.Image`
   background-color: #f2f2fa;
 ` 
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+
+  imagesContainer: {
+    height: 240,
+    backgroundColor: "#fafaf2",
+    borderColor: "#fafaf2",
+    borderWidth: 1,
+  },
+
+  image: {
+    width: "100%",
+    height: 240,
+    resizeMode: 'cover',
+  },
+
+  mapStyle: {
+    width: '100%',
+    height: 150,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+})

@@ -1,53 +1,18 @@
-import { Text, View, Modal, Button, TouchableNativeFeedback, TouchableOpacity} from 'react-native';
-import MapView, { Callout, Marker, Polyline,  } from 'react-native-maps';
-import {
-  requestForegroundPermissionsAsync, 
-  getCurrentPositionAsync, 
-  LocationObject,
-  watchPositionAsync,
-  LocationAccuracy
-} from 'expo-location'
+import { Text, View, Modal,TouchableOpacity, Image, ImageBackground} from 'react-native';
+import MapView, {  Marker  } from 'react-native-maps';
+
 import {styles} from '../../../styles'
-import { useEffect, useRef, useState } from 'react';
 import { PointType, pointEnum } from '../../../src/commons/pointEnum';
 import { Pointer } from '../../../src/components/Pointer';
 import { useModal } from '../../../src/hooks/useModal';
 import { ContentDetails } from '../../components/ContentDetails';
 import styled from 'styled-components/native';
 import { useLocation } from '../../context/locationContext';
+import { StyleSheet } from 'react-native';
 
 export default function MapScreen () {
-    // const [location, setLocation] = useState<LocationObject | null>(null)
-    // const mapRef = useRef<MapView>(null)
     const points = Object.values(pointEnum);
     const {isOpen, toggleModal} = useModal()
-
-
-  // async function requestLocationPermissionsAsync(){
-  //   const { granted } = await requestForegroundPermissionsAsync()
-  //   if(granted){
-  //     const currentPosition = await getCurrentPositionAsync()
-  //     setLocation(currentPosition)
-  //   }
-  // }
-
-  // useEffect(()=>{
-  //   requestLocationPermissionsAsync()
-  // }, [])
-
-  // useEffect(()=>{
-  //   watchPositionAsync({
-  //     accuracy: LocationAccuracy.Highest,
-  //     timeInterval: 1000,
-  //     distanceInterval: 1
-  //   }, (response)=>{
-  //     setLocation(response)
-  //     mapRef.current?.animateCamera({
-  //       pitch: 30,
-  //       center: response.coords
-  //     })
-  //   })
-  // }, [])
 
   const { mapRef, location } = useLocation();
 
@@ -75,7 +40,8 @@ export default function MapScreen () {
           latitude:location.coords.latitude,
           longitude:location.coords.longitude,
         }}
-      />  
+        icon={require('../../../assets/images/user-icon156.png')}
+      /> 
 
       {
         points.map((point: PointType)=> { 
@@ -87,8 +53,9 @@ export default function MapScreen () {
                 latitude:lat,
                 longitude:long,
               }}
+              icon={point.icon}
               >
-            {point.slug !== "camping" && 
+            {point.slug !== "camping" &&
               <Pointer 
                 slug={point.slug}
                 name={point.name}
@@ -96,7 +63,8 @@ export default function MapScreen () {
                 description={point.description}
                 imageUrl={point.imageUrl}
                 location={point.location}
-              />                
+                icon={point.icon}
+              />                 
             }
             </Marker>
         )})
@@ -133,3 +101,20 @@ export const ButtonClosedModal = styled(TouchableOpacity)`
     justify-content: center
 
 `
+
+const styless = StyleSheet.create({
+  image: {
+    width: 56,
+    height: 56,
+    borderRadius: 56,
+    resizeMode: 'cover',
+    opacity: 0.5,
+  },
+
+  pointImage: {
+    width: 56,
+    height: 56,
+    resizeMode: 'contain',
+  },
+
+})

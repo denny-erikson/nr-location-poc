@@ -42,6 +42,7 @@ export const ImagePointer = styled.View`
   border-radius: 46px;
   border: 1px solid #333;
   margin-right: 8px;
+  resize: 'cover';
 `
 
 export const TitlePoint = styled.Text`
