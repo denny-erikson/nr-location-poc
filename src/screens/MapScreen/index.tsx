@@ -1,5 +1,5 @@
 import { Text, View, Modal, Button, TouchableNativeFeedback, TouchableOpacity} from 'react-native';
-import MapView, { Callout, Marker,  } from 'react-native-maps';
+import MapView, { Callout, Marker, Polyline,  } from 'react-native-maps';
 import {
   requestForegroundPermissionsAsync, 
   getCurrentPositionAsync, 
@@ -14,39 +14,42 @@ import { Pointer } from '../../../src/components/Pointer';
 import { useModal } from '../../../src/hooks/useModal';
 import { ContentDetails } from '../../components/ContentDetails';
 import styled from 'styled-components/native';
+import { useLocation } from '../../context/locationContext';
 
 export default function MapScreen () {
-    const [location, setLocation] = useState<LocationObject | null>(null)
-    const mapRef = useRef<MapView>(null)
+    // const [location, setLocation] = useState<LocationObject | null>(null)
+    // const mapRef = useRef<MapView>(null)
     const points = Object.values(pointEnum);
     const {isOpen, toggleModal} = useModal()
 
 
-  async function requestLocationPermissionsAsync(){
-    const { granted } = await requestForegroundPermissionsAsync()
-    if(granted){
-      const currentPosition = await getCurrentPositionAsync()
-      setLocation(currentPosition)
-    }
-  }
+  // async function requestLocationPermissionsAsync(){
+  //   const { granted } = await requestForegroundPermissionsAsync()
+  //   if(granted){
+  //     const currentPosition = await getCurrentPositionAsync()
+  //     setLocation(currentPosition)
+  //   }
+  // }
 
-  useEffect(()=>{
-    requestLocationPermissionsAsync()
-  }, [])
+  // useEffect(()=>{
+  //   requestLocationPermissionsAsync()
+  // }, [])
 
-  useEffect(()=>{
-    watchPositionAsync({
-      accuracy: LocationAccuracy.Highest,
-      timeInterval: 1000,
-      distanceInterval: 1
-    }, (response)=>{
-      setLocation(response)
-      mapRef.current?.animateCamera({
-        pitch: 30,
-        center: response.coords
-      })
-    })
-  }, [])
+  // useEffect(()=>{
+  //   watchPositionAsync({
+  //     accuracy: LocationAccuracy.Highest,
+  //     timeInterval: 1000,
+  //     distanceInterval: 1
+  //   }, (response)=>{
+  //     setLocation(response)
+  //     mapRef.current?.animateCamera({
+  //       pitch: 30,
+  //       center: response.coords
+  //     })
+  //   })
+  // }, [])
+
+  const { mapRef, location } = useLocation();
 
   return (
     <View style={styles.container}>
@@ -62,6 +65,11 @@ export default function MapScreen () {
       }}
       mapType='satellite'
     >
+      {/* {location && route.length > 0 &&  <Polyline
+        coordinates={route}
+        strokeColor="#ff0000"
+        strokeWidth={3}
+      />} */}
       <Marker 
         coordinate={{
           latitude:location.coords.latitude,

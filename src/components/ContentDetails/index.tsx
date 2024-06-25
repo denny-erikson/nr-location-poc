@@ -5,9 +5,11 @@ import { ImageSlider } from '../ImageSlider';
 import { useModal } from '../../hooks/useModal';
 import { useFilterPoint } from '../../hooks/useFilterPoint';
 import { calculateDistanceAndTime } from '../../utils/calculateDistanceAndTime';
+import { useLocation } from '../../context/locationContext';
 
 
 export const ContentDetails = () => {
+  const { location } = useLocation();
   const {toggleModal} = useModal()
   const {point} = useFilterPoint()
   const points = Object.values(pointEnum);
@@ -16,9 +18,21 @@ export const ContentDetails = () => {
     points[0].imageUrl,
     points[0].imageUrl,
   ];
+  
   const { distanceMeters, timeMinutes } = calculateDistanceAndTime([
-    -22.83625411510771, -45.78033164558295
+    location?.coords.latitude || 0,
+    location?.coords.longitude || 0
   ], point?.location || [0, 0]);
+
+
+  const handleStartNavigation = () => {
+    if (point) {
+    const destination = { latitude: point?.location[0], longitude: point?.location[1] }; // Exemplo de coordenadas de São Paulo
+      // setNewDestination(destination);
+      toggleModal()
+    }
+  };
+
   return (
     <CardContentDetails>        
       <ImageSlider images={images} isOpen/>
@@ -56,7 +70,7 @@ export const ContentDetails = () => {
             points={[points[1]]}
           /> */}
         </MapContainer>
-        <ButtonMap onPress={toggleModal}>
+        <ButtonMap onPress={handleStartNavigation}>
           <TextMap>Ver rota para HoverBoard</TextMap>
         </ButtonMap>
       </ContainerPosition>
