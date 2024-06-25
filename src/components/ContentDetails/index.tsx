@@ -1,6 +1,6 @@
-import {Image, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {FlatList, Image, ListRenderItem, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components/native';
-import { pointEnum } from '../../commons/pointEnum';
+import { PointType, pointEnum } from '../../commons/pointEnum';
 import { useModal } from '../../hooks/useModal';
 import { useFilterPoint } from '../../hooks/useFilterPoint';
 import { calculateDistanceAndTime } from '../../utils/calculateDistanceAndTime';
@@ -12,12 +12,7 @@ export const ContentDetails = () => {
   const { location } = useLocation();
   const {toggleModal} = useModal()
   const {point} = useFilterPoint()
-  const points = Object.values(pointEnum);
-  const images = [
-    points[0].imageUrl,
-    points[0].imageUrl,
-    points[0].imageUrl,
-  ];
+  const points = Object.values(pointEnum) as PointType[];
   
   const { distanceMeters, timeMinutes } = calculateDistanceAndTime([
     location?.coords.latitude || 0,
@@ -42,18 +37,34 @@ export const ContentDetails = () => {
     pitch: 30
   };
 
+
+  const renderItem: ListRenderItem<string> = ({item}:any) => (
+    <Image
+      style={styles.image}
+      source={{ uri: item }}
+    />
+  );
+
+  const HorizontalImageList = () => {
+    return (
+      <FlatList
+        data={point?.images}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.flatListContainer}
+      />
+    );
+  };
+  
+  
+
   return (
     <CardContentDetails>        
-      <View style={styles.imagesContainer}>
-        <ScrollView horizontal pagingEnabled>
-          {/* <Image style={styles.image} source={require("../../../assets/images/rover-image.png")} />
-          <Image style={styles.image} source={{ uri: 'https://fmnova.com.br/images/noticias/safe_image.jpg' }} />
-          <Image style={styles.image} source={{ uri: 'https://fmnova.com.br/images/noticias/safe_image.jpg' }} /> */}
-        </ScrollView>
+      <View style={{ flex: 1, width:"100%", justifyContent: 'center', alignItems: 'center' }}>
+        <HorizontalImageList />
       </View>
-
-      <Image style={styles.image} source={require('../../../assets/images/rover-image.png')} />
-      <Image style={styles.image} source={{ uri: point?.imageUrl }} />
 
       <View style={{ paddingHorizontal: 20}}>
       <View style={{
@@ -75,7 +86,7 @@ export const ContentDetails = () => {
       />
 
       <CardDistance>
-        <IconDistence source={""} alt='icon'/>
+        <IconDistence source={require('../../../assets/images/moviment-icon.png')} alt='icon'/>
         <TextDistance>{`A ${distanceMeters} metros, aproximadamente ${timeMinutes} minutos`}</TextDistance>
       </CardDistance>
 
@@ -107,7 +118,7 @@ export const ContentDetails = () => {
               }}
             >
               <Marker 
-                // icon={mapMarkerImg}
+                icon={point?.icon}
                 coordinate={{ 
                   latitude: point?.location[0]  || 0,
                   longitude: point?.location[1] || 0,
@@ -116,7 +127,7 @@ export const ContentDetails = () => {
             </MapView>
         </MapContainer>
         <ButtonMap onPress={handleStartNavigation}>
-          <TextMap>Ver rota para HoverBoard</TextMap>
+          <TextMap>{`Ver rota para ${point?.name}`}</TextMap>
         </ButtonMap>
       </ContainerPosition>
       </View>
@@ -162,7 +173,7 @@ export const MapContainer = styled.View`
 `
 
 export const CardContentDetails = styled.View`
-  display:flex;
+  flex:1;
   flex-direction:column;
   align-items:flex-start;
   justify-content: flex-start;
@@ -202,9 +213,6 @@ export const TextDistance = styled.Text`
 export const IconDistence = styled.Image`
   width: 26px;
   height: 26px;
-
-  border-radius: 26px;
-  background-color: #f2f2fa;
 ` 
 
 const styles = StyleSheet.create({
@@ -222,6 +230,8 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: 240,
+    marginHorizontal: 5,
+    borderRadius: 10,
     resizeMode: 'cover',
   },
 
@@ -231,4 +241,11 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
+
+  flatListContainer: {
+    paddingVertical: 10,
+    width: "100%"
+  },
 })
+
+

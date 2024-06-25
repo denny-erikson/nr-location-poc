@@ -63,6 +63,7 @@ export default function MapScreen () {
                 description={point.description}
                 imageUrl={point.imageUrl}
                 location={point.location}
+                images={point.images}
                 icon={point.icon}
               />                 
             }

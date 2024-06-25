@@ -9,7 +9,7 @@ import { useEffect } from "react"
 import { Callout } from "react-native-maps"
 
 
-export const Pointer = ({slug, name, imageUrl, category, description, location}: PointType) =>{
+export const Pointer = ({slug, name, imageUrl, category, description, location, images}: PointType) =>{
     const {toggleModal} = useModal()
     const {setPoint} = useFilterPoint()
 
@@ -25,7 +25,8 @@ export const Pointer = ({slug, name, imageUrl, category, description, location}:
                 imageUrl,
                 category,
                 description,
-                location
+                location,
+                images
               })
             }}>
 
