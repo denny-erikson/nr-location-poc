@@ -7,6 +7,7 @@ import { useFilterPoint } from "../../hooks/useFilterPoint"
 import { StyleSheet } from "react-native"
 import { useEffect } from "react"
 import { Callout } from "react-native-maps"
+import { useGyroscope } from "@/src/context/gyroscopeContext"
 
 
 export const Pointer = ({ pointer }: { 
@@ -15,12 +16,14 @@ export const Pointer = ({ pointer }: {
 }) =>{
     const {toggleModal} = useModal()
     const {setPoint} = useFilterPoint()
+    const {setIsGyroscopeEnabled} = useGyroscope()
 
     return (
         <Callout 
                    
           tooltip
           onPress={()=>{
+            setIsGyroscopeEnabled()
             toggleModal()
             setPoint(pointer)
             }}>

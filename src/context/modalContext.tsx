@@ -13,10 +13,12 @@ interface ModalProvider {
 
 export const ModalContextProvider = ({children}:ModalProvider)=>{
     const [isOpen, setIsOpen] = useState<boolean>(false)
+
+ 
     return (
         <ModalContext.Provider value={{
             isOpen,
-            toggleModal: () => setIsOpen(!isOpen)
+            toggleModal:  () => setIsOpen(!isOpen)
         }}>{children}</ModalContext.Provider>
     )
 }

@@ -9,47 +9,42 @@ import { ContentDetails } from '../../components/ContentDetails';
 import styled from 'styled-components/native';
 import { useLocation } from '../../context/locationContext';
 import { MarkerUser } from '@/src/components/MarkerUser';
-import { useEffect, useState } from 'react';
-import { Gyroscope } from 'expo-sensors';
+import { useEffect, useRef, useState } from 'react';
+import { useGyroscope } from '@/src/context/gyroscopeContext';
 
 export default function MapScreen () {
-  const [gyroscopeData, setGyroscopeData] = useState({ x: 0, y: 0, z: 0 });
     const points = Object.values(pointEnum);
     const {isOpen, toggleModal} = useModal()
 
   const { mapRef, location } = useLocation();
+  const {isGyroscopeEnabled, smoothedGyroscopeData, setIsGyroscopeEnabled, gyroscopeData} = useGyroscope()
 
   const [mapLoaded, setMapLoaded] = useState(false);
+
+  const smoothingFactor = 0.3; 
 
   const onMapLayout = () => {
     setMapLoaded(true);
   };
 
-  useEffect(() => {
-    // Subscribe to gyroscope data
-    const subscription = Gyroscope.addListener(gyroscopeData => {
-      setGyroscopeData(gyroscopeData);
-    });
 
-    // Set the update interval for the gyroscope data
-    Gyroscope.setUpdateInterval(100);
-
-    // Clean up the subscription on unmount
-    return () => {
-      subscription.remove();
+  useEffect(()=>{
+    const smoothData = {
+      x: smoothedGyroscopeData.current.x * (1 - smoothingFactor) + gyroscopeData.x * smoothingFactor,
+      y: smoothedGyroscopeData.current.y * (1 - smoothingFactor) + gyroscopeData.y * smoothingFactor,
+      z: smoothedGyroscopeData.current.z * (1 - smoothingFactor) + gyroscopeData.z * smoothingFactor,
     };
-  }, []);
+    smoothedGyroscopeData.current = smoothData;
 
-  useEffect(() => {
     if (mapRef.current) {
-      // Adjust the map's camera based on the gyroscope data
-      const { x, y } = gyroscopeData;
+      const { x, y } = smoothedGyroscopeData.current;
       mapRef.current.animateCamera({
-        heading: x * 100,  // Adjust this multiplier as needed
-        pitch: y * 100,    // Adjust this multiplier as needed
+        heading: (y + Math.PI) * (-315 / Math.PI),
+        pitch: x * 50,  
       });
     }
-  }, [gyroscopeData]);
+  
+  },[gyroscopeData, isGyroscopeEnabled])
 
   return (
     <View style={styles.container}>
@@ -118,7 +113,10 @@ export default function MapScreen () {
 
     
     <Modal animationType="fade" visible={isOpen}>
-        <ButtonClosedModal onPress={toggleModal}>
+        <ButtonClosedModal onPress={()=>{
+          toggleModal()
+          setIsGyroscopeEnabled()
+        }}>
             <Text>&#x2715;</Text>
         </ButtonClosedModal>
         <ContentDetails/>

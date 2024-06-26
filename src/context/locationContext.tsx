@@ -35,7 +35,7 @@ export const LocationContextProvider = ({ children }: { children: ReactNode }) =
         {
           accuracy: Location.Accuracy.Highest,
           timeInterval: 3000,
-          distanceInterval: 10,
+          distanceInterval: 3,
         },
         (response) => {
           setLocation(response);

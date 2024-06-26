@@ -6,11 +6,13 @@ import { useFilterPoint } from '../../hooks/useFilterPoint';
 import { calculateDistanceAndTime } from '../../utils/calculateDistanceAndTime';
 import { useLocation } from '../../context/locationContext';
 import MapView, { Marker } from 'react-native-maps';
+import { useGyroscope } from '@/src/context/gyroscopeContext';
 
 
 export const ContentDetails = () => {
   const { location } = useLocation();
   const {toggleModal} = useModal()
+  const {setIsGyroscopeEnabled} = useGyroscope()
   const {point} = useFilterPoint()
   const points = Object.values(pointEnum) as PointType[];
   
@@ -25,6 +27,7 @@ export const ContentDetails = () => {
     const destination = { latitude: point?.location[0], longitude: point?.location[1] }; // Exemplo de coordenadas de São Paulo
       // setNewDestination(destination);
       toggleModal()
+      setIsGyroscopeEnabled()
     }
   };
 
