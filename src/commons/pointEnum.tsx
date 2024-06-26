@@ -30,14 +30,12 @@ export enum PointEnumType {
   GATEHOUSE = "gatehouse",
   CAFETERIA = "cafeteria",
   COUNTRYSIDE = "countryside",
-  SAND_SOCCER = "sand_soccer",
   VOLEI_DE_AREIA = "volei_de_areia",
   GINASIO_1_CELSO_HALPERN = "ginasio_1_celso_halpern",
   ENFERMARIA = "enfermaria",
   RESTAURANTE = "restaurante",
   ITAPORA = "itapora",
   QUADRAS_DE_TENIS = "quadras_de_tenis",
-  PISCINAS_TOBOGA = "piscinas_toboga",
   SALA_HOLLYWOOD = "sala_hollywood",
   RECEPCAO = "recepcao",
   RESTAURANTE_VILLAGE_ITAPEVA = "restaurante_village_itapeva",
@@ -136,7 +134,7 @@ export const pointEnum: MarkerTypes = {
     description: "Descubra a beleza tranquila do Lago Ness.",
     imageUrl: "https://example.com/lago_ness.jpg",
     location: [
-      -22.833897385097686, -45.77969445501984
+      -22.833400572827745, -45.78679678314937
     ],
     images:[
       "https://img.freepik.com/fotos-premium/diretamente-acima-do-tiro-de-bola-de-futebol-na-praia-de-areia_1048944-14690520.jpg?size=626&ext=jpg&ga=GA1.1.2116175301.1719100800&semt=ais_user",
@@ -152,7 +150,7 @@ export const pointEnum: MarkerTypes = {
     description: "Bem-vindo à nossa entrada principal.",
     imageUrl: "https://example.com/main_entrance.jpg",
     location: [
-      -22.83368366935716, -45.777470016256
+      -22.833674893906892, -45.7776692694971
     ],
     images:[
       "https://img.freepik.com/fotos-premium/diretamente-acima-do-tiro-de-bola-de-futebol-na-praia-de-areia_1048944-14690520.jpg?size=626&ext=jpg&ga=GA1.1.2116175301.1719100800&semt=ais_user",
@@ -216,7 +214,7 @@ export const pointEnum: MarkerTypes = {
     description: "Divirta-se em nosso salão de jogos com diversos jogos indoor.",
     imageUrl: "https://example.com/game_room.jpg",
     location: [
-      -22.836268348402495, -45.77997857965061 // 
+      -22.835610025749745, -45.78129063385782 // 
     ],
     images: [
       "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
@@ -232,7 +230,7 @@ export const pointEnum: MarkerTypes = {
     description: "Visite nossa portaria para assistência e informações.",
     imageUrl: "https://example.com/gatehouse.jpg",
     location: [
-      -22.836268348402495, -45.77997857965061 // 
+      -22.833683916032207, -45.77750359552937 // 
     ],
     images: [
       "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
@@ -248,7 +246,7 @@ export const pointEnum: MarkerTypes = {
     description: "Pegue um lanche em nossa cantina com uma variedade de lanches e bebidas.",
     imageUrl: "https://example.com/cafeteria.jpg",
     location: [
-      -22.836268348402495, -45.77997857965061 // 
+      -22.83616270467028, -45.78097178266564 // 
     ],
     images: [
       "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
@@ -264,23 +262,7 @@ export const pointEnum: MarkerTypes = {
     description: "Experimente o charme rústico de nossa área campestre.",
     imageUrl: "https://example.com/countryside.jpg",
     location: [
-      -22.836268348402495, -45.77997857965061 // 
-    ],
-    images: [
-      "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
-      "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
-      "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png"
-    ],
-    icon: require('../../assets/images/pointer-default-icon156.png')
-  },
-  sand_soccer: {
-    slug: 'sand_soccer',
-    name: "Futebol de Areia",
-    category: "esportes",
-    description: "Jogue futebol em nossas praias de areia.",
-    imageUrl: "https://example.com/sand_soccer.jpg",
-    location: [
-      -22.836268348402495, -45.77997857965061 // 
+      -22.836262819544345, -45.77999210579581 // 
     ],
     images: [
       "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
@@ -296,7 +278,7 @@ export const pointEnum: MarkerTypes = {
     description: "Divirta-se jogando vôlei em nossas quadras de areia.",
     imageUrl: "https://example.com/volei_de_areia.jpg",
     location: [
-      -22.836268348402495, -45.77997857965061 // 
+      -22.836671312179988, -45.78281378949897 // 
     ],
     images: [
       "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
@@ -312,7 +294,7 @@ export const pointEnum: MarkerTypes = {
     description: "Participe de eventos esportivos no nosso ginásio 1, dedicado a Celso Halpern.",
     imageUrl: "https://example.com/ginasio_1_celso_halpern.jpg",
     location: [
-      -22.836268348402495, -45.77997857965061 // 
+      -22.835761626442086, -45.781563880183086 // 
     ],
     images: [
       "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
@@ -328,7 +310,7 @@ export const pointEnum: MarkerTypes = {
     description: "Visite nossa enfermaria para assistência médica e emergências.",
     imageUrl: "https://example.com/enfermaria.jpg",
     location: [
-      -22.836268348402495, -45.77997857965061 // 
+      -22.83608686901446, -45.77985471409495 // 
     ],
     images: [
       "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
@@ -344,7 +326,7 @@ export const pointEnum: MarkerTypes = {
     description: "Saboreie deliciosas refeições em nosso restaurante.",
     imageUrl: "https://example.com/restaurante.jpg",
     location: [
-      -22.836268348402495, -45.77997857965061 // 
+      -22.836407194561577, -45.78115765129678 // 
     ],
     images: [
       "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
@@ -360,7 +342,7 @@ export const pointEnum: MarkerTypes = {
     description: "Explore a beleza natural de Itaporã.",
     imageUrl: "https://example.com/itapora.jpg",
     location: [
-      -22.836268348402495, -45.77997857965061 // 
+      -22.83626392130458, -45.77944094756523 // 
     ],
     images: [
       "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
@@ -376,23 +358,7 @@ export const pointEnum: MarkerTypes = {
     description: "Pratique tênis em nossas quadras profissionais.",
     imageUrl: "https://example.com/quadras_de_tenis.jpg",
     location: [
-      -22.836268348402495, -45.77997857965061 // 
-    ],
-    images: [
-      "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
-      "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
-      "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png"
-    ],
-    icon: require('../../assets/images/pointer-default-icon156.png')
-  },
-  piscinas_toboga: {
-    slug: 'piscinas_toboga',
-    name: "Piscinas + Tobogã",
-    category: "atividades aquáticas",
-    description: "Divirta-se nas nossas piscinas com um emocionante tobogã.",
-    imageUrl: "https://example.com/piscinas_toboga.jpg",
-    location: [
-      -22.836268348402495, -45.77997857965061 // 
+      -22.833456821682848, -45.77965986963115 // 
     ],
     images: [
       "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
@@ -408,7 +374,7 @@ export const pointEnum: MarkerTypes = {
     description: "Assista a filmes e eventos na nossa sala de cinema estilo Hollywood.",
     imageUrl: "https://example.com/sala_hollywood.jpg",
     location: [
-      -22.836268348402495, -45.77997857965061 // 
+      -22.835750180928645, -45.78178708065067 // 
     ],
     images: [
       "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
@@ -424,7 +390,7 @@ export const pointEnum: MarkerTypes = {
     description: "Visite nossa recepção para check-in e informações sobre o resort.",
     imageUrl: "https://example.com/recepcao.jpg",
     location: [
-      -22.836268348402495, -45.77997857965061 // 
+      -22.836511548824646, -45.78003157485222 // 
     ],
     images: [
       "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
@@ -440,7 +406,7 @@ export const pointEnum: MarkerTypes = {
     description: "Experimente a gastronomia local no nosso restaurante Village Itapeva.",
     imageUrl: "https://example.com/restaurante_village_itapeva.jpg",
     location: [
-      -22.836268348402495, -45.77997857965061 // 
+      -22.837322381298993, -45.78158860391019 // 
     ],
     images: [
       "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
@@ -456,10 +422,10 @@ export const pointEnum: MarkerTypes = {
     description: "Divirta-se no nosso espaço dedicado ao entretenimento e festas.",
     imageUrl: "https://example.com/espaco_fun_fest.jpg",
     location: [
-      -22.836268348402495, -45.77997857965061 // 
+      -22.834152065831155, -45.780266274848984 // 
     ],
     images: [
-      "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrCe9-x8Axqppbff_ssAtsR31-cEKAnYXFRRFUXTmGbnA1qsQIZkUZs_xkeql628EJYfbZKgQxfypdxy_ZA5iRjDTXz5gMppGzZEmgTkUGbhQw79Zm3Ot5Kx8tCiki_GnngGI6WOEwkD0/s1600/10536721_699765193448833_5425443847238699748_o.jpg",
       "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png",
       "https://w7.pngwing.com/pngs/943/962/png-transparent-frame-gallery-image-images-photo-picture-pictures-mobile-basic-icon.png"
     ],
