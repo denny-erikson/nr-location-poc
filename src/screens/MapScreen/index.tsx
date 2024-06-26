@@ -8,11 +8,12 @@ import { useModal } from '../../../src/hooks/useModal';
 import { ContentDetails } from '../../components/ContentDetails';
 import styled from 'styled-components/native';
 import { useLocation } from '../../context/locationContext';
-import { StyleSheet } from 'react-native';
 import { MarkerUser } from '@/src/components/MarkerUser';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Gyroscope } from 'expo-sensors';
 
 export default function MapScreen () {
+  const [gyroscopeData, setGyroscopeData] = useState({ x: 0, y: 0, z: 0 });
     const points = Object.values(pointEnum);
     const {isOpen, toggleModal} = useModal()
 
@@ -23,6 +24,32 @@ export default function MapScreen () {
   const onMapLayout = () => {
     setMapLoaded(true);
   };
+
+  useEffect(() => {
+    // Subscribe to gyroscope data
+    const subscription = Gyroscope.addListener(gyroscopeData => {
+      setGyroscopeData(gyroscopeData);
+    });
+
+    // Set the update interval for the gyroscope data
+    Gyroscope.setUpdateInterval(100);
+
+    // Clean up the subscription on unmount
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (mapRef.current) {
+      // Adjust the map's camera based on the gyroscope data
+      const { x, y } = gyroscopeData;
+      mapRef.current.animateCamera({
+        heading: x * 100,  // Adjust this multiplier as needed
+        pitch: y * 100,    // Adjust this multiplier as needed
+      });
+    }
+  }, [gyroscopeData]);
 
   return (
     <View style={styles.container}>
