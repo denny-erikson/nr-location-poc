@@ -1,4 +1,4 @@
-import { Text, View, Modal,TouchableOpacity, Image, ImageBackground} from 'react-native';
+import { Text, View, Modal,TouchableOpacity, ActivityIndicator} from 'react-native';
 import MapView, {  Marker  } from 'react-native-maps';
 
 import {styles} from '../../../styles'
@@ -10,6 +10,7 @@ import styled from 'styled-components/native';
 import { useLocation } from '../../context/locationContext';
 import { StyleSheet } from 'react-native';
 import { MarkerUser } from '@/src/components/MarkerUser';
+import { useState } from 'react';
 
 export default function MapScreen () {
     const points = Object.values(pointEnum);
@@ -17,8 +18,25 @@ export default function MapScreen () {
 
   const { mapRef, location } = useLocation();
 
+  const [mapLoaded, setMapLoaded] = useState(false);
+
+  const onMapLayout = () => {
+    setMapLoaded(true);
+  };
+
   return (
     <View style={styles.container}>
+      {!mapLoaded && (
+        <ActivityIndicator
+          size="large"
+          color="#ED1B26"
+          style={{
+            position: 'absolute',
+            top: '50%',
+            alignSelf: 'center',
+          }}
+        />
+      )}
     {location && 
     <MapView 
       ref={mapRef}
@@ -30,6 +48,7 @@ export default function MapScreen () {
         longitudeDelta:0.005,
       }}
       mapType='satellite'
+      onLayout={onMapLayout}
     >
       {/* {location && route.length > 0 &&  <Polyline
         coordinates={route}
@@ -100,20 +119,3 @@ export const ButtonClosedModal = styled(TouchableOpacity)`
     justify-content: center
 
 `
-
-const styless = StyleSheet.create({
-  image: {
-    width: 56,
-    height: 56,
-    borderRadius: 56,
-    resizeMode: 'cover',
-    opacity: 0.5,
-  },
-
-  pointImage: {
-    width: 56,
-    height: 56,
-    resizeMode: 'contain',
-  },
-
-})
