@@ -13,13 +13,13 @@ export const SplotCalloutPointer = styled.View`
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 `
 export const CalloutPointer = styled(Callout)`
-  flex:1;
+  display:flex;
   justify-content: center;
   align-items: center;
   `
 
 export const CardPointer = styled.View`
-  flex:1;
+  display:flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;

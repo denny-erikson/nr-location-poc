@@ -12,6 +12,7 @@
     "@styled/typescript-styled-plugin": "^1.0.1",
     "@types/react-slick": "^0.23.13",
     "@types/styled-components-react-native": "^5.2.5",
+    "date-fns": "^3.6.0",
     "expo": "~51.0.14",
     "expo-location": "~17.0.1",
     "expo-screen-orientation": "~7.0.5",

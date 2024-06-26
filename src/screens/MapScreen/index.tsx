@@ -9,6 +9,7 @@ import { ContentDetails } from '../../components/ContentDetails';
 import styled from 'styled-components/native';
 import { useLocation } from '../../context/locationContext';
 import { StyleSheet } from 'react-native';
+import { MarkerUser } from '@/src/components/MarkerUser';
 
 export default function MapScreen () {
     const points = Object.values(pointEnum);
@@ -41,7 +42,13 @@ export default function MapScreen () {
           longitude:location.coords.longitude,
         }}
         icon={require('../../../assets/images/user-icon156.png')}
-      /> 
+      >
+        <MarkerUser 
+          name="Denny Erikson"
+          type='Colaborador'
+          school='NR - Santo Antonio do Pinhal'
+        />
+      </Marker> 
 
       {
         points.map((point: PointType)=> { 
@@ -56,16 +63,7 @@ export default function MapScreen () {
               icon={point.icon}
               >
             {point.slug !== "camping" &&
-              <Pointer 
-                slug={point.slug}
-                name={point.name}
-                category={point.category}
-                description={point.description}
-                imageUrl={point.imageUrl}
-                location={point.location}
-                images={point.images}
-                icon={point.icon}
-              />                 
+              <Pointer pointer={point}/>                 
             }
             </Marker>
         )})

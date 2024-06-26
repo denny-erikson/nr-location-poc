@@ -28,15 +28,6 @@ export const ContentDetails = () => {
     }
   };
 
-  const initialCamera = {
-    zoom: 17,
-    center: {
-      latitude: point?.location[0] || 0,
-      longitude: point?.location[1] || 0,
-    },
-    pitch: 30
-  };
-
 
   const renderItem: ListRenderItem<string> = ({item}:any) => (
     <Image
@@ -93,6 +84,7 @@ export const ContentDetails = () => {
 
       <ContainerPosition>
         <MapContainer>
+          <View style={styles.mapInnerContainer}>
           <MapView 
               initialRegion={{
                 latitude: point?.location[0]  || 0,
@@ -125,6 +117,7 @@ export const ContentDetails = () => {
                 }}
               />
             </MapView>
+            </View>
         </MapContainer>
         <ButtonMap onPress={handleStartNavigation}>
           <TextMap>{`Ver rota para ${point?.name}`}</TextMap>
@@ -163,12 +156,11 @@ export const TextMap = styled.Text`
   color: #2E3190;
 `
 export const MapContainer = styled.View`
-  /* position: absolute;
-  top:0;
-  left:0; */
   width: 100%;
   height: 160px;
   border-radius: 24px;
+
+  overflow: 'hidden';
   
 `
 
@@ -228,23 +220,30 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: "100%",
-    height: 240,
-    marginHorizontal: 5,
-    borderRadius: 10,
     resizeMode: 'cover',
+    borderRadius: 16,
+    width: 360, 
+    height: 240, 
+    marginRight: 6,
+
   },
 
   mapStyle: {
     width: '100%',
     height: 150,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+  },
+
+  mapInnerContainer: {
+    flex: 1,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    overflow: 'hidden',
   },
 
   flatListContainer: {
-    paddingVertical: 10,
-    width: "100%"
+    padding: 10,
+    alignItems: 'center',
+    backgroundColor: "#fbfbfd"
   },
 })
 
